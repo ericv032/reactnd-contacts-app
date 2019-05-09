@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import ContactList from './ListContacts';
+import ListContacts from './ListContacts';
+import PropTypes from 'prop-types'
 
 
 class App extends Component {
@@ -24,6 +25,12 @@ class App extends Component {
           "name": "Tyler McGinnis",
           "handle": "tylermcginnis",
           "avatarURL": "http://localhost:5001/tyler.jpg"
+        },
+        {
+          "id": "eric",
+          "name": "Eric Vazquez",
+          "handle": "ericvazquez",
+          "avatarURL": "http://localhost:5001/richard.jpg"
         }
        ]
 
@@ -45,7 +52,7 @@ class App extends Component {
   render() {
     return (
       <div>
-      <ContactList 
+      <ListContacts
       contacts={this.state.contacts} 
       onDeleteContact={this.removeContact}
       
@@ -54,6 +61,11 @@ class App extends Component {
      
     )
   }
+}
+
+ListContacts.propTypes = {
+  contacts: PropTypes.array.isRequired,
+  onDeleteContact: PropTypes.func.isRequired,
 }
 
 export default App

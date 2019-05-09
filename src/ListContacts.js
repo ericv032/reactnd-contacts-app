@@ -1,14 +1,51 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
-class ContactList extends Component {
+
+class ListContacts extends Component {
+
+  static propTypes = {
+     contacts: PropTypes.array.isRequired,
+     onDeleteContact: PropTypes.func.isRequired,
+  }
+
+  state = {
+    query: ''
+  }
+  updateQuery = (query) => {
+    this.setState(() => ({
+      query: query.trim()
+
+    }))
+    }
 
   render() {
+    const { query } = this.state
+    const { contacts, onDeleteContact } = this.props
+
+    const showingContacts = query === ''
+    ? contacts
+    : contacts.filter((c) => (
+      c.name.toLowerCase().includes(query.toLowerCase())
+    ))
+
     //console.log('Props', this.props)
     return(
 
+      <div className="list-contacts">
       <div>
+        <form>
+          <input
+          className="search-contacts"
+          type="text"
+          placeholder="Search Contacts"
+          value={query}
+          onChange={(event) => this.updateQuery(event.target.value)}
+          />
+        </form>
+      </div>
         <ol className='class-list'>
-          {this.props.contacts.map((contact) => (
+          {showingContacts.map((contact) => (
               <li key={contact.id} className='contact-list-item'>
              
              <div className='contact-avatar' 
@@ -23,7 +60,7 @@ class ContactList extends Component {
               <p>{contact.handle}</p>
              </div>
              <button
-             onClick={() => this.props.onDeleteContact(contact)}
+             onClick={() => onDeleteContact(contact)}
              className="contact-remove">Remove
              </button>
               
@@ -35,4 +72,6 @@ class ContactList extends Component {
   }
 }
 
-export default ContactList
+
+
+export default ListContacts
