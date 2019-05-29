@@ -51,6 +51,9 @@ body, .app {
   background-repeat: no-repeat;
   border-radius: 50%;
 }
+form input {
+  position: relative;
+}
 
 .create-contact-details input {
   width: 100%;
@@ -101,7 +104,12 @@ body, .app {
 
 .add-contact {
   display: block;
+  text-align: right;
   width: 73px;
+  height: 50px;
+  position: absolute;
+  top:65px;
+  right:0;
   background: white;
   background-image: url('./icons/person-add.svg');
   background-repeat: no-repeat;
